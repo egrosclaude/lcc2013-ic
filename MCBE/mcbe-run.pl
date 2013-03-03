@@ -1,7 +1,13 @@
-#!/usr/bin/perl 
+#!/usr/bin/perl -s
+
 $codes = { LD => 2, ST => 3, ADD => 4, SUB => 5, JMP => 6, JZ => 7, HLT => 1, NOP => 0 };
 $labels = {IN => 30, OUT => 31};
 @lines = ();
+
+
+if(scalar(@ARGV) == 0) {
+	die "mcbe-run.pl $ARGV[0] [-a | -r] fuente.mcbe";
+}
 
 sub dec2bin {
 	($fld, $num) = @_;
@@ -79,6 +85,8 @@ sub printline {
 	}
 }
 
+# print assembly
+
 foreach $line (@lines) {
 	@l = @{$line};
 	($nl, $inst, $arg, $bin) = @l;
@@ -91,10 +99,14 @@ foreach $line (@lines) {
 	$ibin = insttobin($inst,$arg);
 	@PROG[$nl] = [$nl,$inst,$arg,$ibin];
 	@p = @PROG[$nl];
-	printline(@p);
+	printline(@p) if (defined $a && !defined $r);
 	@MEM[$nl]= $ibin;
 }
-print "---------------------------------------------------\n";
+
+exit if (defined $a);
+
+# run program
+
 our $IR = 0;
 our $PC = 0;
 our $A = 0;
@@ -123,7 +135,7 @@ sub interpreta {
 		$PC++;
 		if($addr == 31) {
 			printf "SALIDA: $s\n",@MEM[$addr];
-			$nada = <STDIN>;
+			#$nada = <STDIN>;
 		}
 	}
 	if($inst eq '100') { #ADD
@@ -159,9 +171,9 @@ sub interpreta {
 }
 
 sub printstatus {
-	print "---------------------------------------------------\n";
+	print "------------------------------------------------------------\n";
 	print "PC:$PC              IR:$IR            A:$A\n";
-	print "---------------------------------------------------\n";
+	print "------------------------------------------------------------\n";
 	foreach $j (0..7) {
 		foreach $i (7, 15, 23, 31) {
 			$k = $i - $j;
@@ -169,7 +181,7 @@ sub printstatus {
 		}
 		print "\n";
 	}
-	print "---------------------------------------------------\n";
+	print "------------------------------------------------------------\n";
 	$nada = <STDIN>;
 }
 		
@@ -178,11 +190,11 @@ $hlt = 0;
 while($hlt == 0) {
 	die "El PC salió de la memoria: $PC" if($PC < 0 || $PC > 31);
 	@p = @PROG[$PC];
-	printline(@p);
-	$nada = <STDIN>;
+	printline(@p) if(!defined $r);
+	$nada = <STDIN> if(!defined $r);
 	$IR = @MEM[$PC];
 	interpreta($IR);
-	printstatus;
+	printstatus if (!defined $r);
 }
 
 print "Programa Terminado\n";
