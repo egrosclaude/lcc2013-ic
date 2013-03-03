@@ -1,0 +1,4 @@
+	LD VAR
+	SUB MENOS
+VAR:	10
+MENOS:	7
