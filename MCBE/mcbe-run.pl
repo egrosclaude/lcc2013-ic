@@ -16,7 +16,7 @@ sub dec2bin {
 	return $s;
 }
 sub bin2dec {
-    return unpack("N", pack("B32", substr("0" x 32 . shift, -32)));
+    return unpack("N", pack("B32", substr("0" x 32 . shift, -32))) & 255;
 }
 sub dec2sigmag {
         ($fld, $num) = @_;
@@ -61,11 +61,11 @@ open INFILE, "$ARGV[0]" or die "Falta nombre de archivo";
 while(<INFILE>) {
 	/^([A-Z]+[0-9]*):/ and setlabel($1);
 	/^ *\t*([A-Z]+) *$/ and noarg($1);
-	/^ *\t*([A-Z]+) +([0-9]+)/ and numarg($1,$2);
+	/^ *\t*([A-Z]+) +(-*[0-9]+)/ and numarg($1,$2);
 	/^ *\t*([A-Z]+) +([A-Z]+[0-9]*)/ and lblarg($1,$2);
-	/^ *\t*(\d+)/ and data($1);
+	/^ *\t*(-*\d+)/ and data($1);
 	/^[A-Z]+[0-9]*: *\t*+([A-Z]+) *$/ and noarg($1);
-	/^[A-Z]+[0-9]*: *\t*+([A-Z]+) +([0-9]+)/ and numarg($1,$2);
+	/^[A-Z]+[0-9]*: *\t*+([A-Z]+) +(-*[0-9]+)/ and numarg($1,$2);
 	/^[A-Z]+[0-9]*: *\t*+([A-Z]+) +([A-Z]+[0-9]*)/ and lblarg($1,$2);
 	/^[A-Z]+[0-9]*: *\t*(\d+)/ and data($1);
 }
