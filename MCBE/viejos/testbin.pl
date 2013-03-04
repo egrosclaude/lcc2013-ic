@@ -3,7 +3,6 @@ sub dec2sigmag {
         $mask = sprintf("%%0%db", $fld);
 	
 	if($num < 0) {
-		print "Es neg";
 		$num = -$num + 16;
 	}
 	$num %= 32;
