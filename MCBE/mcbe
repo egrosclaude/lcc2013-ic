@@ -70,7 +70,7 @@ sub readprog {
 		/^[A-Z]+[0-9]*: *\t*+([A-Z]+) *$/ and push @l, noarg($1);
 		/^[A-Z]+[0-9]*: *\t*+([A-Z]+) +(-*[0-9]+)/ and push @l, numarg($1,$2);
 		/^[A-Z]+[0-9]*: *\t*+([A-Z]+) +([A-Z]+[0-9]*)/ and push @l, lblarg($1,$2);
-		/^[A-Z]+[0-9]*: *\t*(\d+)/ and push @l, data($1);
+		/^[A-Z]+[0-9]*: *\t*(-*\d+)/ and push @l, data($1);
 	}
 	close INFILE;
 	return @l;
@@ -249,5 +249,8 @@ if(scalar(@ARGV) == 0) {
 } 
 my @lines = readprog;
 my @prog = assemble(@lines);
-printasm(@prog) if(defined $a);
+if(defined $a) {
+	printasm(@prog);
+	exit;
+}
 run(@prog);
