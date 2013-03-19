@@ -1,0 +1,64 @@
+
+Datos e información
+
+La información 
+Es producida por eventos
+Se almacena en algún soporte
+	Y luego es recuperada
+Es comunicada
+Es procesada por agentes
+	Puede ser copiada de un soporte a otro
+	Puede ser combinada con otras fuentes
+	Información de entrada y de salida
+	
+Procesamiento automático
+	Dispositivos de procesamiento de información
+	Procesamiento a mano
+		Casos en que es posible
+		Casos en que no es práctico
+		
+Información en la historia
+	Signos primitivos 
+	El alfabeto
+	El ábaco, los quipus
+	La regla de cálculo analógico
+	El telar de Jacquard
+	La máquina de Babbage
+	La máquina de Hollerith
+	
+Representación analógica y digital
+	Valores discretos, numerables
+	Valores continuos
+	
+
+Preguntas binarias
+	La decisión más simple
+	Mínima unidad de información
+	
+Bit 
+	Puede tomar dos valores
+	Representado con 0 y 1
+	
+Byte 
+	Conjunto ordenado de 8 bits
+	Toma valores entre 00000000 y 11111111
+	Rango entero 0 a 255
+
+Codificación y compresión
+
+Datos alfanuméricos
+	Conjunto de caracteres
+	ASCII - Unicode - UTF8
+	Archivos
+	 
+Texto
+	Texto plano
+	Procesadores de texto
+
+Multimedia
+	Imagen
+	Audio
+	Video
+	
+Múltiplos
+

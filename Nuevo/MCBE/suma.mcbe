@@ -1,0 +1,9 @@
+# Leer dos datos del teclado y sumarlos
+	LD 30
+	ST 6
+	LD 30
+	ADD 6
+	ST 31
+	HLT
+
+

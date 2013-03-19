@@ -1,0 +1,5 @@
+	LD IN
+	ADD DATO
+	ST OUT
+	HLT
+DATO:	-2
